@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const app = express();
+const listenPort = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(compress());
@@ -31,6 +32,6 @@ app.get('/events', (req, res) => {
   res.json(events);
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+app.listen(listenPort, () => {
+  console.log('Listening on port 3000!');
 });
