@@ -21,7 +21,16 @@ function fetchEvents() {
   }).then((res) => {
     return res.json();
   }).then((data) => {
-    events = data;
+    const rows = data.extractorData.data[0].group.map((e) => {
+      return {
+        month: e['MONTH VALUE'][0].text,
+        day: e['DAY NUMBER'][0].text,
+        link: e['MONTH VALUE'][0].href,
+        title: e['MEDIUMTITLE LINK'][0].text,
+        where: e['COL VALUE'][0].text,
+      };
+    });
+    events = rows;
   });
 }
 
