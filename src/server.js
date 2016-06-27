@@ -1,5 +1,6 @@
 import express from 'express';
 import fetch from 'node-fetch';
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const app = express();
@@ -8,7 +9,7 @@ const listenPort = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(compress());
 
-const minutes = 1 * 60 * 1000;
+const minutes = 5 * 60 * 1000;
 
 let events = {};
 
