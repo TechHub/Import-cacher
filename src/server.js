@@ -21,7 +21,6 @@ function fetchEvents() {
   }).then((res) => {
     return res.json();
   }).then((data) => {
-    console.log(data);
     const rows = data.results.map((e) => {
       return {
         month: e.month_value,
