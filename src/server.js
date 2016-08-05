@@ -13,7 +13,7 @@ const minutes = 5 * 60 * 1000;
 let events = {};
 
 function fetchEvents() {
-  fetch('https://extraction.import.io/query/runtime/91c77516-f566-4500-bcb3-81c26aae3ac3?_apikey=e81503c3d3c941dbbb1fba0471a2ca95b4edd222c1ba2eed856af57b482a04a4403d6ccd90fcab1d10e692e6f2db24e893dd8e9c26e0e2a7a7f0339ec8f1d405c03288a40a34001f76d536738a9835fa&url=http%3A%2F%2Fwww.techhub.com%2Fevents', {
+  fetch('https://api.import.io/store/connector/07f01498-6804-4ebd-a9d3-d70a1018f45a/_query?input=webpage/url:https%3A%2F%2Fwww.techhub.com%2Fevents%2F&&_apikey=e81503c3d3c941dbbb1fba0471a2ca95b4edd222c1ba2eed856af57b482a04a4403d6ccd90fcab1d10e692e6f2db24e893dd8e9c26e0e2a7a7f0339ec8f1d405c03288a40a34001f76d536738a9835fa', {
     method: 'GET',
     headers: {},
     timeout: 30000,
@@ -21,13 +21,14 @@ function fetchEvents() {
   }).then((res) => {
     return res.json();
   }).then((data) => {
-    const rows = data.extractorData.data[0].group.map((e) => {
+    console.log(data);
+    const rows = data.results.map((e) => {
       return {
-        month: e['MONTH VALUE'][0].text,
-        day: e['DAY NUMBER'][0].text,
-        link: e['MONTH VALUE'][0].href,
-        title: e['MEDIUMTITLE LINK'][0].text,
-        where: e['COL VALUE'][0].text,
+        month: e.month_value,
+        day: e.day_number,
+        link: e.col_link,
+        title: e['mediumtitle_link/_text'],
+        where: e.col_value,
       };
     });
     events = rows;
